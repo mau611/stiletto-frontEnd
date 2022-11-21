@@ -1,23 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import ShowProductoAlmacen from './componentes/almacen/ShowProductoAlmacen';
+import CreateProductoAlmacen from './componentes/almacen/CreateProductoAlmacen';
+import EditProductoAlmacen from './componentes/almacen/EditProductoAlmacen';
+import Inicio from './componentes/estructura/inicio';
+import Agenda from './componentes/agenda/Agenda';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+        <Route path='/' element={<Inicio/>} />
+          <Route path='/almacen' element={<ShowProductoAlmacen/>} />
+          <Route path='/crear' element={<CreateProductoAlmacen/>} />
+          <Route path='/edit/:id' element={<EditProductoAlmacen/>} />
+          <Route path='/agenda' element={<Agenda/>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
