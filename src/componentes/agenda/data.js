@@ -237,3 +237,34 @@ export const TipoConsulta = [
       nombre: "Consulta 7",
     },
   ];
+
+  export const Tratamientos = [
+    {
+      tratamiento_id: 1,
+      nombre: "Tratamiento 1",
+    },
+    {
+      tratamiento_id: 2,
+      nombre: "Tratamiento 2",
+    },
+    {
+      tratamiento_id: 3,
+      nombre: "Tratamiento 3",
+    },
+    {
+      tratamiento_id: 4,
+      nombre: "Tratamiento 4",
+    },
+    {
+      tratamiento_id: 5,
+      nombre: "Tratamiento 5",
+    },
+    {
+      tratamiento_id: 6,
+      nombre: "Tratamiento 6",
+    },
+    {
+      tratamiento_id: 7,
+      nombre: "Tratamiento 7",
+    },
+  ];
