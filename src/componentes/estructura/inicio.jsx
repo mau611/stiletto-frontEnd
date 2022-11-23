@@ -1,6 +1,7 @@
 import React from "react";
 import "./css/inicio.css";
 import { Link } from "react-router-dom";
+import NavBar from "./NavBar";
 
 const inicio = () => {
   return (

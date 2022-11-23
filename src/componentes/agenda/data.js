@@ -268,3 +268,34 @@ export const TipoConsulta = [
       nombre: "Tratamiento 7",
     },
   ];
+
+  export const Profesional = [
+    {
+      profesional_id: 1,
+      nombre: "Profesional 1",
+    },
+    {
+      profesional_id: 2,
+      nombre: "Profesional 2",
+    },
+    {
+      profesional_id: 3,
+      nombre: "Profesional 3",
+    },
+    {
+      profesional_id: 4,
+      nombre: "Profesional 4",
+    },
+    {
+      profesional_id: 5,
+      nombre: "Profesional 5",
+    },
+    {
+      profesional_id: 6,
+      nombre: "Profesional 6",
+    },
+    {
+      profesional_id: 7,
+      nombre: "Profesional 7",
+    },
+  ];
