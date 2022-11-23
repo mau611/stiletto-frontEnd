@@ -20,7 +20,7 @@ const inicio = () => {
             </Link>
           </div>
           <div className="col-lg-3">
-            <Link to="/historias" className="btn btn-outline-light btn-lg">
+            <Link to="/clinica" className="btn btn-outline-light btn-lg">
               Historias
             </Link>
           </div>

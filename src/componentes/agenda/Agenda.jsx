@@ -7,6 +7,7 @@ import {
   PERSONAS,
   TipoConsulta,
   Tratamientos,
+  Profesional
 } from "./data";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import FormularioAgenda from "./FormularioAgenda";
@@ -75,6 +76,7 @@ const Agenda = () => {
                 pacientes={PERSONAS}
                 tipo_Consulta={TipoConsulta}
                 tratamientos={Tratamientos}
+                profesionales={Profesional}
               />
             )}
             viewerExtraComponent={(fields, event) => {
