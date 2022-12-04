@@ -1,20 +1,29 @@
 import { Fragment, useState } from "react";
-import { Button, Typography } from "@mui/material";
+import {
+  TextField,
+  Button,
+  DialogActions,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Typography,
+} from "@mui/material";
 import { Scheduler } from "@aldabil/react-scheduler";
+import NavBar from "../estructura/NavBar";
 import {
   RESOURCES,
   EVENTS,
   PERSONAS,
   TipoConsulta,
   Tratamientos,
-  Profesional
+  Profesional,
+  EstadoConsulta
 } from "./data";
-import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
-import FormularioAgenda from "./FormularioAgenda";
-import NavBar from "../estructura/NavBar";
+import DetallesPaciente from "./DetallesPaciente";
 
-const Agenda = () => {
-  const [mode, setMode] = useState("default");
+function Agenda() {
+  const [mode, setMode] = useState("tabs");
   return (
     <div>
       <NavBar titulo={"Shanti - Spa"}>
@@ -39,12 +48,7 @@ const Agenda = () => {
             </Button>
           </div>
           <Scheduler
-            view="day"
-            day={{
-              startHour: 6,
-              endHour: 21,
-              step: 60,
-            }}
+            resources={RESOURCES}
             translations={{
               navigation: {
                 month: "Mes",
@@ -52,16 +56,35 @@ const Agenda = () => {
                 day: "Dia",
                 today: "Hoy",
               },
+              form: {
+                addTitle: "Crear",
+                editTitle: "Editar",
+                confirm: "Guardar",
+                delete: "Eliminar",
+                cancel: "Cancelar",
+              },
               event: {
                 title: "Titulo",
                 start: "Inicia",
                 end: "Termina",
+                allDay: "Todo el dia",
               },
               moreEvents: "More...",
             }}
-            events={EVENTS}
-            resources={RESOURCES}
-            direction="ltr"
+            view={"day"}
+            day={{
+              startHour: 6,
+              endHour: 21,
+              step: 60,
+            }}
+            week={{
+              weekDays: [2, 3, 4, 5, 6, 0, 1],
+              weekStartOn: 6,
+              startHour: 6,
+              endHour: 21,
+              step: 60,
+              navigation: true,
+            }}
             resourceFields={{
               idField: "admin_id",
               textField: "title",
@@ -70,39 +93,85 @@ const Agenda = () => {
               colorField: "color",
             }}
             resourceViewMode={mode}
-            customEditor={(scheduler) => (
-              <FormularioAgenda
-                scheduler={scheduler}
-                pacientes={PERSONAS}
-                tipo_Consulta={TipoConsulta}
-                tratamientos={Tratamientos}
-                profesionales={Profesional}
-              />
-            )}
+            fields={[
+              {
+                name: "admin_id",
+                type: "select",
+                default: RESOURCES[0].admin_id,
+                options: RESOURCES.map((res) => {
+                  return {
+                    id: res.admin_id,
+                    text: `${res.title} `,
+                    value: res.admin_id, //Should match "name" property
+                  };
+                }),
+                config: { label: "Gabinete", required: true },
+              },
+              {
+                name: "paciente_id",
+                type: "select",
+                options: PERSONAS.map((res) => {
+                  return {
+                    id: res.paciente_id,
+                    text: `${res.nombre} `,
+                    value: res.paciente_id, //Should match "name" property
+                  };
+                }),
+                config: { label: "Paciente", required: true },
+              },
+              {
+                name: "tratamiento_id",
+                type: "select",
+                options: Tratamientos.map((res) => {
+                  return {
+                    id: res.tratamiento_id,
+                    text: `${res.nombre} `,
+                    value: res.tratamiento_id, //Should match "name" property
+                  };
+                }),
+                config: { label: "Tratamiento", required: true },
+              },
+              {
+                name: "tipoConsulta_id",
+                type: "select",
+                options: TipoConsulta.map((res) => {
+                  return {
+                    id: res.tipoConsulta_id,
+                    text: `${res.nombre} `,
+                    value: res.tipoConsulta_id, //Should match "name" property
+                  };
+                }),
+                config: { label: "Tipo Consulta", required: true },
+              },
+              {
+                name: "estadoConsulta_id",
+                type: "select",
+                options: EstadoConsulta.map((res) => {
+                  return {
+                    id: res.estadoConsulta_id,
+                    text: `${res.nombre} `,
+                    value: res.estadoConsulta_id, //Should match "name" property
+                  };
+                }),
+                config: { label: "Estado", required: true },
+              },
+              {
+                name: "profesional_id",
+                type: "select",
+                options: Profesional.map((res) => {
+                  return {
+                    id: res.profesional_id,
+                    text: `${res.nombre} `,
+                    value: res.profesional_id, //Should match "name" property
+                  };
+                }),
+                config: { label: "Licenciado a cargo", required: true },
+              },
+            ]}
             viewerExtraComponent={(fields, event) => {
               return (
                 <div>
-                  {fields.map((field, i) => {
-                    if (field.name === "admin_id") {
-                      const admin = field.options.find(
-                        (fe) => fe.id === event.admin_id
-                      );
-                      return (
-                        <Typography
-                          key={i}
-                          style={{ display: "flex", alignItems: "center" }}
-                          color="textSecondary"
-                          variant="caption"
-                          noWrap
-                        >
-                          <PersonRoundedIcon /> {admin.text}
-                          <PersonRoundedIcon /> {admin.value}
-                        </Typography>
-                      );
-                    } else {
-                      return "";
-                    }
-                  })}
+                  <DetallesPaciente/>
                 </div>
               );
             }}
@@ -111,6 +180,6 @@ const Agenda = () => {
       </NavBar>
     </div>
   );
-};
+}
 
 export default Agenda;

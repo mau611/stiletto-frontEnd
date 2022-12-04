@@ -140,39 +140,39 @@ export const EVENTS = [
 
 export const RESOURCES = [
   {
-    admin_id: 1,
+    admin_id: "Gabinete 1",
     title: "Gabinete 1",
     color: "#ab2d2d",
   },
   {
-    admin_id: 2,
+    admin_id: "Gabinete 2",
     title: "Gabinete 2",
     color: "#58ab2d",
   },
   {
-    admin_id: 3,
+    admin_id: "Gabinete 3",
     title: "Gabinete 3",
     color: "#a001a2",
   },
   {
-    admin_id: 4,
+    admin_id: "Gabinete 4",
     title: "Gabinete 4",
     color: "#08c5bd",
   },
   {
-    admin_id: 5,
+    admin_id: "Camara Hiperbarica",
     title: "Camara Hiperbarica",
-    color: "#08c5bd",
+    color: "#ccc42e",
   },
   {
-    admin_id: 6,
+    admin_id: "Gabinete 6",
     title: "Gabinete 6",
-    color: "#08c5bd",
+    color: "#c781ef",
   },
   {
-    admin_id: 7,
+    admin_id: "Imagenologia",
     title: "Imagenologia",
-    color: "#08c5bd",
+    color: "#910032",
   },
 ];
 
@@ -297,5 +297,28 @@ export const TipoConsulta = [
     {
       profesional_id: 7,
       nombre: "Profesional 7",
+    },
+  ];
+
+  export const EstadoConsulta = [
+    {
+      estadoConsulta_id: 1,
+      nombre: "Cancelada",
+    },
+    {
+      estadoConsulta_id: 2,
+      nombre: "Por Llegar",
+    },
+    {
+      estadoConsulta_id: 3,
+      nombre: "En Espera",
+    },
+    {
+      estadoConsulta_id: 4,
+      nombre: "Finalizada",
+    },
+    {
+      estadoConsulta_id: 5,
+      nombre: "Reprogramada",
     },
   ];
