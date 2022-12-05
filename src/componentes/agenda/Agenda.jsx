@@ -1,28 +1,33 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
+import axios from "axios";
 import {
-  TextField,
   Button,
-  DialogActions,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Typography,
 } from "@mui/material";
+
 import { Scheduler } from "@aldabil/react-scheduler";
 import NavBar from "../estructura/NavBar";
 import {
   RESOURCES,
-  EVENTS,
   PERSONAS,
   TipoConsulta,
   Tratamientos,
   Profesional,
-  EstadoConsulta
+  EstadoConsulta,
 } from "./data";
 import DetallesPaciente from "./DetallesPaciente";
 
+const endpoint = "http://localhost:8000/api";
+
 function Agenda() {
+  const [pacientes, setPacientes] = useState([])
+  useEffect(()=>{
+    getPacientes()
+  },[])
+  const getPacientes = async () => {
+    const response = await axios.get(`${endpoint}/pacientes`)
+    setPacientes(response.data)
+  }
+
   const [mode, setMode] = useState("tabs");
   return (
     <div>
@@ -78,8 +83,8 @@ function Agenda() {
               step: 60,
             }}
             week={{
-              weekDays: [2, 3, 4, 5, 6, 0, 1],
-              weekStartOn: 6,
+              weekDays: [0,1,2, 3, 4, 5, 6],
+              weekStartOn: 1,
               startHour: 6,
               endHour: 21,
               step: 60,
@@ -110,11 +115,11 @@ function Agenda() {
               {
                 name: "paciente_id",
                 type: "select",
-                options: PERSONAS.map((res) => {
+                options: pacientes.map((res) => {
                   return {
-                    id: res.paciente_id,
-                    text: `${res.nombre} `,
-                    value: res.paciente_id, //Should match "name" property
+                    id: res.id,
+                    text: `${res.nombres} ${res.apellidos} `,
+                    value: res.id, //Should match "name" property
                   };
                 }),
                 config: { label: "Paciente", required: true },
@@ -171,7 +176,19 @@ function Agenda() {
             viewerExtraComponent={(fields, event) => {
               return (
                 <div>
-                  <DetallesPaciente/>
+                  {fields.map((field, i) => {
+                if (field.name === "paciente_id") {
+                  const paciente = field.options.find(
+                    (fe) => fe.id === event.paciente_id
+                  );
+                  return (
+                    <DetallesPaciente key={i} nombrePaciente={paciente.text}/>
+                  );
+                } else {
+                  return "";
+                }
+              })}
+                  
                 </div>
               );
             }}

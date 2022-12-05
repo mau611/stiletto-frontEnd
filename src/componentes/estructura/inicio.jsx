@@ -47,7 +47,7 @@ const inicio = () => {
             </Link>
           </div>
           <div className="col-lg-3">
-            <Link to="/config" className="btn btn-outline-light btn-lg">
+            <Link to="/configuracion" className="btn btn-outline-light btn-lg">
               Configuracion
             </Link>
           </div>

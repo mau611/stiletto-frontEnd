@@ -37,7 +37,7 @@ const style = {
   p: 4,
 };
 
-export default function DetallesPaciente() {
+export default function DetallesPaciente({nombrePaciente}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -50,7 +50,7 @@ export default function DetallesPaciente() {
             R
           </Avatar>
         }
-        title="Nombre Paciente"
+        title={nombrePaciente}
         subheader="Tiene 10 Sesiones"
       />
       <CardMedia
@@ -80,7 +80,7 @@ export default function DetallesPaciente() {
           <PriceCheckIcon />
         </IconButton>
         <div>
-          <Button onClick={handleOpen}>Open modal</Button>
+          <Button onClick={handleOpen}>Ver Historial</Button>
           <Modal
             open={open}
             onClose={handleClose}
