@@ -1,32 +1,28 @@
 import React from "react";
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useNavigate } from "react-router-dom";
-
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 
 const Columnas = [
   { field: "id", headerName: "ID", width: 70 },
-  { field: "nombre", headerName: "Consultorio", width: 130 },
-  { field: "color", headerName: "Color", width: 130 },
+  { field: "estado", headerName: "Estado consulta", width: 130 },
 ];
 
 const endpoint = "http://localhost:8000/api";
 
-const CrearGabinetes = () => {
-
+const CrearEstadoCita = () => {
   const [state, setState] = useState({
-    nombre:"",
-    color:""
-  })
+    estado: "",
+  });
   const handleChange = (value, name) => {
+    console.log(value)
     setState((prev) => {
       return {
         ...prev,
@@ -41,31 +37,37 @@ const CrearGabinetes = () => {
   };
   const navigate = useNavigate();
   const handleClose = () => {
+    setState({
+      estado: "",
+    });
     setOpen(false);
   };
 
-  const [gabinetes, setGabinetes] = useState([]);
+  const [estados, setEstados] = useState([]);
   useEffect(() => {
-    getGabinetes();
+    getEstados();
   }, []);
 
-  const getGabinetes = async () => {
-    const response = await axios.get(`${endpoint}/consultorios`);
-    getGabinetes(response.data);
+  const getEstados = async () => {
+    const response = await axios.get(`${endpoint}/estadoCitas`);
+    setEstados(response.data);
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    await axios.post(`${endpoint}/consultorio`,{
-      nombre: state.nombre,
-      color: state.color,
-    },navigate("/"));
-  }
+    e.preventDefault();
+    await axios.post(
+      `${endpoint}/estadoCita`,
+      {
+        estado: state.estado,
+      },
+      navigate("/")
+    );
+  };
 
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
-        rows={gabinetes}
+        rows={estados}
         columns={Columnas}
         pageSize={5}
         rowsPerPageOptions={[5]}
@@ -73,32 +75,23 @@ const CrearGabinetes = () => {
       />
       <div>
         <Button variant="outlined" onClick={handleClickOpen}>
-          Agregar consultorio
+          Agregar Estado de cita
         </Button>
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Creacion de consultorio</DialogTitle>
+          <DialogTitle>Creacion del Estado de una cita</DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
-              value={state.nombre}
+              value={state.estado}
               margin="dense"
-              id="nombre"
-              label="Nombre"
+              id="estado"
+              label="Estado de cita"
               type="text"
               fullWidth
               variant="standard"
-              onChange={(e)=>handleChange(e.target.value, "nombre")}
+              onChange={(e) => handleChange(e.target.value, "estado")}
             />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="color"
-              label="Color"
-              type="text"
-              fullWidth
-              variant="standard"
-              onChange={(e)=>handleChange(e.target.value, "color")}
-            />
+            
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancelar</Button>
@@ -110,4 +103,4 @@ const CrearGabinetes = () => {
   );
 };
 
-export default CrearGabinetes;
+export default CrearEstadoCita;

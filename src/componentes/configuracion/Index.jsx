@@ -7,7 +7,10 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import NavBar from "../estructura/NavBar";
-import CrearGabinetes from "./tratamientos/CrearGabinetes";
+import CrearGabinetes from "../configuracion/gabinetes/CrearGabinetes";
+import CrearTipoConsulta from "./tipoConsultas/CrearTipoConsultas";
+import CrearEstadoCita from "./estadoCitas/CrearEstadoCita";
+import Licenciados from "./licenciados/Licenciados";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -58,7 +61,7 @@ const Index = () => {
     <NavBar>
         <h1>Configuracion</h1>
         <hr />
-      <Box sx={{ bgcolor: "background.paper"}}>
+      <Box sx={{ flexGrow: 1, bgcolor: "background.paper"}}>
         <AppBar position="static">
           <Tabs
             value={value}
@@ -70,8 +73,8 @@ const Index = () => {
             style={{backgroundColor:"#155E30"}}
           >
             <Tab label="Gabinetes" {...a11yProps(0)} />
-            <Tab label="Consultas" {...a11yProps(1)} />
-            <Tab label="Estado consulta" {...a11yProps(2)} />
+            <Tab label="Tipos de Consulta" {...a11yProps(1)} />
+            <Tab label="Estado Citas" {...a11yProps(2)} />
             <Tab label="Licenciados de turno" {...a11yProps(3)} />
           </Tabs>
         </AppBar>
@@ -80,13 +83,13 @@ const Index = () => {
             <CrearGabinetes/>
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
-            Item Two
+            <CrearTipoConsulta/>
           </TabPanel>
           <TabPanel value={value} index={2} dir={theme.direction}>
-            Item Three
+            <CrearEstadoCita/>
           </TabPanel>
           <TabPanel value={value} index={3} dir={theme.direction}>
-            Item Three
+            <Licenciados/>
           </TabPanel>
         </div>
       </Box>

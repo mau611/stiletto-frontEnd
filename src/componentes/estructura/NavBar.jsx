@@ -26,35 +26,19 @@ import AnalyticsIcon from "@mui/icons-material/AnalyticsOutlined";
 import ComputerIcon from "@mui/icons-material/ComputerOutlined";
 import SettingsIcon from "@mui/icons-material/SettingsOutlined";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   MenuItem,
   TextField,
 } from "@mui/material";
-import Modal from "@mui/material/Modal";
-import AgregarPaciente from "../pacientes/AgregarPaciente";
 
 const drawerWidth = 240;
 const endpoint = "http://localhost:8000/api/paciente";
-
-const style = {
-  position: "fixed",
-  overflow: "scroll",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "auto",
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -125,8 +109,6 @@ export default function NavBar({ children, titulo }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [openModal, setOpenModal] = React.useState(false);
-  const [sexo, setSexo] = React.useState("");
-  const [aseguradora, setAseguradora] = React.useState("");
 
   const [state, setState] = React.useState({
     nombres: "",
@@ -154,9 +136,6 @@ export default function NavBar({ children, titulo }) {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  const handleAseguradoraChange = (e) => {
-    setAseguradora(e);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -168,13 +147,9 @@ export default function NavBar({ children, titulo }) {
       ci: state.ci,
       sexo: state.sexo,
       direccion: state.direccion,
-      fecha_registro: "1996/05/4"
+      fecha_registro: "1996/05/4",
     });
     navigate("/");
-  };
-
-  const handleChangeSexo = (e) => {
-    setSexo(e);
   };
 
   const handleDrawerClose = () => {
@@ -397,8 +372,8 @@ export default function NavBar({ children, titulo }) {
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCloseModal}>Cancel</Button>
-              <Button type={"submit"}>Subscribe</Button>
+              <Button onClick={handleCloseModal}>Cancelar</Button>
+              <Button type={"submit"}>Guardar</Button>
             </DialogActions>
           </form>
         </Dialog>
