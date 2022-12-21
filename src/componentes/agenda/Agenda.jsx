@@ -6,11 +6,22 @@ import { Scheduler } from "@aldabil/react-scheduler";
 import NavBar from "../estructura/NavBar";
 
 import DetallesPaciente from "./DetallesPaciente";
+import {Eventos} from "./data"
 
 const endpoint = "http://localhost:8000/api";
 
 function Agenda() {
-  const [eventos, setEventos] = useState([]);
+
+  const obtenerEventos = async(query) =>{
+    console.log({ query });
+    /**Simulate fetchin remote data */
+    const res = await axios.get(`${endpoint}/consultas`).data;
+    console.log(res)
+    return res;
+  }
+
+
+  const [eventos, setEventos] = useState();
   const [pacientes, setPacientes] = useState([]);
   const [gabinetes, setGabinetes] = useState([]);
   const [tipoConsulta, setTipoConsultas] = useState([]);
@@ -28,6 +39,8 @@ function Agenda() {
   const getEventos = async () => {
     const response = await axios.get(`${endpoint}/consultas`);
     setEventos(response.data);
+    console.log(eventos)
+    return eventos
   };
   const getPacientes = async () => {
     const response = await axios.get(`${endpoint}/pacientes`);
@@ -53,8 +66,8 @@ function Agenda() {
   const handleConfirm = async (event, action) => {
     console.log(event.title);
     await axios.post(`${endpoint}/consulta`, {
-      title: event.title,
-      start: event.start,
+      title: new Date(event.title),
+      start: new Date(event.start),
       end: event.end,
       estado: "",
       paciente_id: event.paciente_id,
@@ -97,7 +110,7 @@ function Agenda() {
             </Button>
           </div>
           <Scheduler
-            events={eventos}
+            getRemoteEvents={obtenerEventos}
             resources={gabinetes}
             direction={"ltr"}
             translations={{

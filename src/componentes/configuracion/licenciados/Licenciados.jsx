@@ -60,8 +60,8 @@ const Licenciados = () => {
       {
         nombre: state.nombre,
       },
-      navigate("/")
     );
+    navigate(0);
   };
 
   return (

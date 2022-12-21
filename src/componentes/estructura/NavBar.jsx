@@ -26,7 +26,7 @@ import AnalyticsIcon from "@mui/icons-material/AnalyticsOutlined";
 import ComputerIcon from "@mui/icons-material/ComputerOutlined";
 import SettingsIcon from "@mui/icons-material/SettingsOutlined";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Button,
   Dialog,
@@ -149,7 +149,7 @@ export default function NavBar({ children, titulo }) {
       direccion: state.direccion,
       fecha_registro: "1996/05/4",
     });
-    navigate("/");
+    navigate(0);
   };
 
   const handleDrawerClose = () => {
@@ -223,15 +223,17 @@ export default function NavBar({ children, titulo }) {
                     }}
                   >
                     {index === 0 ? (
-                      <TodayIcon />
+                      <Link to="/agenda">
+                        <TodayIcon />
+                      </Link>
                     ) : index === 1 ? (
                       <PersonAddIcon />
                     ) : index === 2 ? (
-                      <PersonSearchIcon />
+                      <Link to="/pacientes"><PersonSearchIcon /></Link>
                     ) : index === 3 ? (
-                      <LocalHospitalIcon />
+                      <Link to="/"><LocalHospitalIcon /></Link>
                     ) : (
-                      <InventoryIcon />
+                      <Link to="/stock"><InventoryIcon /></Link>
                     )}
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
@@ -260,15 +262,15 @@ export default function NavBar({ children, titulo }) {
                     }}
                   >
                     {index === 0 ? (
-                      <AccountBalanceWalletIcon />
+                      <Link to="/"><AccountBalanceWalletIcon/></Link>
                     ) : index === 1 ? (
-                      <AnalyticsIcon />
+                      <Link to="/"><AnalyticsIcon /></Link>
                     ) : index === 2 ? (
-                      <ComputerIcon />
+                      <Link to="/"><ComputerIcon /></Link>
                     ) : index === 3 ? (
-                      <SettingsIcon />
+                      <Link to="/configuracion"><SettingsIcon /></Link>
                     ) : (
-                      <InventoryIcon />
+                      <Link to="/"><InventoryIcon /></Link>
                     )}
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />

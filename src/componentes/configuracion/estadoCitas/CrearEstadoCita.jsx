@@ -60,8 +60,8 @@ const CrearEstadoCita = () => {
       {
         estado: state.estado,
       },
-      navigate("/")
     );
+    navigate(0);
   };
 
   return (

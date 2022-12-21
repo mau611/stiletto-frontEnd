@@ -64,8 +64,8 @@ const CrearTratamientos = () => {
         nombre: state.nombre,
         color: state.color,
       },
-      navigate("/")
     );
+    navigate(0);
   };
 
   return (
