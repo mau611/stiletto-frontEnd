@@ -66,9 +66,9 @@ function Agenda() {
   const handleConfirm = async (event, action) => {
     console.log(event.title);
     await axios.post(`${endpoint}/consulta`, {
-      title: new Date(event.title),
+      title: event.title,
       start: new Date(event.start),
-      end: event.end,
+      end: new Date(event.end),
       estado: "",
       paciente_id: event.paciente_id,
       tipoConsulta_id: event.tipoConsulta_id,
