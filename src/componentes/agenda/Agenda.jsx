@@ -49,6 +49,7 @@ function Agenda() {
   const getGabinetes = async () => {
     const response = await axios.get(`${endpoint}/consultorios`);
     setGabinetes(response.data);
+    console.log(response.data)
   };
   const getTipoConsultas = async () => {
     const response = await axios.get(`${endpoint}/tipoConsultas`);
